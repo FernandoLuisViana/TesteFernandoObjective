@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:custom="clr-namespace:TesteFernando.Custom"
+             mc:Ignorable="d"
+             x:Class="TesteFernando.Views.CharactersPage" 
+             BackgroundColor="White">
+    <ContentPage.Content>
+      <StackLayout Spacing="0">
+         <Label Padding="25,12,0,0">
+            <Label.FormattedText>
+               <FormattedString>
+                  <Span Text=" BUSCA MARVEL" ForegroundColor="#D42026" FontAttributes="Bold" FontSize="16" FontFamily="Roboto-Black.ttf"/>
+                  <Span Text=" TESTE FRONT-END" ForegroundColor="#D42026" FontSize="16" FontFamily="Roboto-Light.ttf"/>
+               </FormattedString>
+            </Label.FormattedText>
+         </Label>
+         
+         <BoxView Color="#D42026" HeightRequest="2" HorizontalOptions="Start" WidthRequest="55" Margin="30,0,0,0"/>
+
+         <Label Text="Nome do Personagem" TextColor="#D42026" FontSize="14" FontFamily="Roboto-Light.ttf" Margin="30,12,0,0"/>
+
+         <Frame CornerRadius="5" Margin="30,0" Padding="0" BorderColor="LightGray" BackgroundColor="Transparent">
+            <custom:MyEntry Unfocused="SearchBar_Unfocused" x:Name="txtSearchBar"/>
+         </Frame>         
+
+         <StackLayout BackgroundColor="#D42026" Padding="100,20,20,20" Margin="0,12,0,0" Orientation="Horizontal">
+            <Label Text="Nome" TextColor="White"/>
+            <Frame BackgroundColor="Transparent" Padding="0" WidthRequest="30" HeightRequest="30" HorizontalOptions="EndAndExpand" x:Name="btnSync" IsVisible="False">
+               <Frame.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="SyncItensTapped"/>
+               </Frame.GestureRecognizers>
+               <Image Source="icon_refresh"/>
+            </Frame>
+         </StackLayout>
+         
+         <ListView x:Name="listCharacter"
+                SeparatorColor="#D42026"
+                HasUnevenRows="True"
+                ItemSelected="listCharacter_ItemSelected">
+            <ListView.ItemTemplate>
+               <DataTemplate>
+                  <ViewCell>
+                     <StackLayout Padding="18" Orientation="Horizontal">
+                        <Frame Padding="0"
+                            CornerRadius="100"
+                            IsClippedToBounds="True"
+                            WidthRequest="80"
+                            HeightRequest="80"                            
+                            HorizontalOptions="Center"
+                            BackgroundColor="Transparent">
+                           <Image Source="{Binding ImageUri}" Aspect="AspectFill"/>
+                        </Frame>
+                        <Label Text="{Binding Name}" VerticalTextAlignment="Center" />
+                     </StackLayout>
+                  </ViewCell>
+               </DataTemplate>
+            </ListView.ItemTemplate>
+         </ListView>
+
+         <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Padding="12" x:Name="navigatiomBar">
+            <ImageButton x:Name="firstbtn" Source="icons8play48" BackgroundColor="Transparent" RotationY="180" Clicked="FrontPageCharacters_Clicked" CommandParameter="0" HorizontalOptions="StartAndExpand"/>
+            
+            <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+               <Button x:Name="btnstart" Text="{Binding TxtButtonStart, Mode=TwoWay}" CornerRadius="50" WidthRequest="50" HeightRequest="50" BackgroundColor="#D42026" TextColor="White" BorderColor="#D42026" BorderWidth="1" Clicked="StartButton_Clicked" CommandParameter="0"/>
+               <Button x:Name="btncenter" Text="{Binding TxtButtonCenter, Mode=TwoWay}" CornerRadius="50" WidthRequest="50" HeightRequest="50" BackgroundColor="#FFFFFF" TextColor="#D42026" BorderColor="#D42026" BorderWidth="1" Clicked="CenterButton_Clicked" CommandParameter="4"/>
+               <Button x:Name="btnend" Text="{Binding TxtButtonEnd, Mode=TwoWay}" CornerRadius="50" WidthRequest="50" HeightRequest="50" BackgroundColor="#FFFFFF" TextColor="#D42026" BorderColor="#D42026" BorderWidth="1" Clicked="EndButton_Clicked" CommandParameter="8"/>
+            </StackLayout>
+            
+            <ImageButton Source="icons8play48" BackgroundColor="Transparent" Clicked="NextPageCharacters_Clicked" CommandParameter="1" HorizontalOptions="EndAndExpand"/>
+         </StackLayout>
+
+         <BoxView Color="#D42026" HeightRequest="10"/>
+      </StackLayout>
+   </ContentPage.Content>
+</ContentPage>
